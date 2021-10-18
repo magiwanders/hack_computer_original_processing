@@ -1,6 +1,6 @@
 static class Default{
   
-  static float MHZ = 2;
+  static float MHZ = 10;
 
   static boolean TESTS = false;
   static boolean DEBUG = false;
@@ -31,8 +31,8 @@ static class Default{
     return (source & mask) >> index;
   }
   
-  static int KBDscancode(char keyCode) {
-    switch(keyCode) {
+  static int KBDscancode(int keyCode) {
+    switch((char)keyCode) {
 
       case '0': return 48;
       case '1': return 49;
@@ -132,7 +132,7 @@ static class Default{
 
       //case 'Enter': return 128;
       //case 'Backspace': return 129;
-      //case 'ArrowLeft': return 130;
+      case '￿': return 130;
       //case 'ArrowUp': return 131;
       //case 'ArrowRight': return 132;
       //case 'ArrowDown': return 133;

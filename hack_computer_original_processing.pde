@@ -4,7 +4,7 @@ void setup(){
   hackComputer = new HackComputer();
   size(512,256);
   background(255,255,255);
-  frameRate(15);
+  frameRate(60);
   thread("tick");
   if (Default.TESTS) runTests();
   hackComputer.preload("Pong");
@@ -24,6 +24,9 @@ void draw(){
   }
   
   updatePixels();
+  
+  //println(hackComputer.ram.ram[Default.KBD_address]);
+  hackComputer.ram.write_word(Default.KBD_address, 0);
 }
 
 void mouseClicked() {
@@ -41,14 +44,17 @@ void mouseClicked() {
 }
 
 void keyPressed() {
-  println(key + "  _  " + Default.KBDscancode(key));
+  //print(keyCode);
+  if (keyCode == 37) hackComputer.ram.write_word(Default.KBD_address, 130);
+  if (keyCode == 39) hackComputer.ram.write_word(Default.KBD_address, 132);
+  if (keyCode == 82) hackComputer.reset = 1;
 }
 
 void tick() {
   while(true) {
     for(int j=0; j<Default.MHZ*1000;j++) {
       //println("Cycle");
-      //hackComputer.cycle();
+      hackComputer.cycle();
     }
     delay(1);
   }

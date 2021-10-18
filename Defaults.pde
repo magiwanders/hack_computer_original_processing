@@ -1,6 +1,6 @@
 static class Default{
   
-  static float MHZ = 10;
+  static float MHZ = 200;
 
   static boolean TESTS = false;
   static boolean DEBUG = false;

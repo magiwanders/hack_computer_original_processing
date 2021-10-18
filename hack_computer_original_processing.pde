@@ -1,6 +1,7 @@
 HackComputer hackComputer;
 
 void setup(){
+  System.gc();
   hackComputer = new HackComputer();
   size(512,256);
   background(255,255,255);
@@ -9,6 +10,7 @@ void setup(){
   if (Default.TESTS) runTests();
   hackComputer.preload("Pong");
   //hackComputer.ram.ram[0] = 223;
+  //thread("benchmark"); // AROUND 10 MHz on i5 6th gen!
 }
 
 
@@ -58,6 +60,19 @@ void tick() {
     }
     delay(1);
   }
+}
+
+void benchmark() {
+  long start = System.nanoTime();
+  
+  for(int j=0; j<10000000;j++) {
+    hackComputer.cycle();
+  }
+  
+  long end = System.nanoTime();
+  long timeElapsed = end-start;
+  float nsPerCycle = (float)timeElapsed/10000000;
+  println( 1/nsPerCycle + "GHz");
 }
 
 void runTests() {
